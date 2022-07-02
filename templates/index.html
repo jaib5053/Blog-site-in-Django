@@ -1,0 +1,83 @@
+
+{% extends 'basic.html' %} 
+
+{% block body %}
+{% load static %}
+
+  <main id="main">
+
+    <!-- ======= Hero Slider Section ======= -->
+    <section id="hero-slider" class="hero-slider">
+      <div class="container-md" data-aos="fade-in">
+        <div class="row">
+          <div class="col-12">
+            <div class="swiper sliderFeaturedPosts">
+              <div class="swiper-wrapper">
+                {% for post in myposts %}
+                {% if post.featured == 1 %}
+                <div class="swiper-slide">
+                  <a href="post/{{ post.post_id }}" class="img-bg d-flex align-items-end" style="background-image: url({{ post.post_image }} );">
+                    <div class="img-bg-inner">
+                      <h2>{{ post.post_title }}</h2>
+                      <p>{{ post.post_content|slice:'0:300' }}...</p>
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+                {% endfor%}
+
+                
+                  </a>
+                </div>
+              </div>
+              <div class="custom-swiper-button-next">
+                <span class="bi-chevron-right"></span>
+              </div>
+              <div class="custom-swiper-button-prev">
+                <span class="bi-chevron-left"></span>
+              </div>
+
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Hero Slider Section -->
+
+    <!-- ======= Post Grid Section ======= -->
+    <section id="posts" class="posts">
+      <div class="container" data-aos="fade-up">
+        <div class="row g-5">
+          {% for post in myposts %}
+          {% if forloop.counter == 1 %}
+          <div class="col-lg-4">
+            <div class="post-entry-1 lg">
+              <a href="post/{{ post.post_id }}"><img src="{{ post.post_image }}" alt="" class="img-fluid"></a>
+              <div class="post-meta"><span class="date">{{ post.post_category }}</span> <span class="mx-1">&bullet;</span> <span>{{ post.post_date }}</span></div>
+              <h2><a href="post/{{ post.post_id }}">{{ post.post_title }}</a></h2>
+              <p class="mb-4 d-block">{{ post.post_content|slice:'0:300' }}</p>
+
+            </div>
+          </div>
+          <div class="col-lg-8">
+    
+            <div class="row g-5">
+              {% else %}
+              <div class="col-lg-6 border-start custom-border">
+                <div class="post-entry-1">
+                  <a href="post/{{ post.post_id }}"><img src="{{ post.post_image }}" alt="" class="img-fluid shadow"></a>
+                  <div class="post-meta"><span class="date">{{ post.post_category }}</span> <span class="mx-1">&bullet;</span> <span>{{ post.post_date }}</span></div>
+                  <h2><a href="post/{{ post.post_id }}">{{ post.post_title }}</a></h2>
+                  <p class="mb-4 d-block">{{ post.post_content|slice:'0:150' }}<a href="post/{{ post.post_id }}">....</a></p>
+                </div>
+
+            </div>
+          {%  endif %}
+          {%endfor%} </div> </div>
+        </div> <!-- End .row -->
+      </div>
+    </section> <!-- End Post Grid Section -->
+
+  </main><!-- End #main -->
+
+ {% endblock %}
