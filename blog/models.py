@@ -25,3 +25,12 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.post_title
 
+class Contact(models.Model):
+    contact_name=models.TextField(max_length=100)
+    contact_email=models.EmailField(max_length=100)
+    contact_subject=models.TextField(max_length=100)
+    contact_msg=models.CharField(max_length=1000)
+    contact_date=models.DateField(auto_now_add=true)
+
+    def __str__(self):
+        return self.contact_subject
