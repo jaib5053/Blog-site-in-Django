@@ -16,7 +16,7 @@
                 {% for post in myposts %}
                 {% if post.featured == 1 %}
                 <div class="swiper-slide">
-                  <a href="post/{{ post.post_id }}" class="img-bg d-flex align-items-end" style="background-image: url({{ post.post_image }} );">
+                  <a href="post/{{ post.post_slug }}" class="img-bg d-flex align-items-end" style="background-image: url({{ post.post_image }} );">
                     <div class="img-bg-inner">
                       <h2>{{ post.post_title }}</h2>
                       <p>{{ post.post_content|slice:'0:300' }}...</p>
