@@ -52,9 +52,9 @@
           {% if forloop.counter == 1 %}
           <div class="col-lg-4">
             <div class="post-entry-1 lg">
-              <a href="post/{{ post.post_id }}"><img src="{{ post.post_image }}" alt="" class="img-fluid"></a>
+              <a href="post/{{ post.post_slug }}"><img src="{{ post.post_image }}" alt="" class="img-fluid"></a>
               <div class="post-meta"><span class="date">{{ post.post_category }}</span> <span class="mx-1">&bullet;</span> <span>{{ post.post_date }}</span></div>
-              <h2><a href="post/{{ post.post_id }}">{{ post.post_title }}</a></h2>
+              <h2><a href="post/{{ post.post_slug }}">{{ post.post_title }}</a></h2>
               <p class="mb-4 d-block">{{ post.post_content|slice:'0:300' }}</p>
 
             </div>
@@ -65,17 +65,28 @@
               {% else %}
               <div class="col-lg-6 border-start custom-border">
                 <div class="post-entry-1">
-                  <a href="post/{{ post.post_id }}"><img src="{{ post.post_image }}" alt="" class="img-fluid shadow"></a>
+                  <a href="post/{{ post.post_slug }}"><img src="{{ post.post_image }}" alt="" class="img-fluid shadow"></a>
                   <div class="post-meta"><span class="date">{{ post.post_category }}</span> <span class="mx-1">&bullet;</span> <span>{{ post.post_date }}</span></div>
-                  <h2><a href="post/{{ post.post_id }}">{{ post.post_title }}</a></h2>
-                  <p class="mb-4 d-block">{{ post.post_content|slice:'0:150' }}<a href="post/{{ post.post_id }}">....</a></p>
+                  <h2><a href="post/{{ post.post_slug }}">{{ post.post_title }}</a></h2>
+                  <p class="mb-4 d-block">{{ post.post_content|slice:'0:150' }}<a href="post/{{ post.post_slug }}">....</a></p>
                 </div>
 
             </div>
           {%  endif %}
           {%endfor%} </div> </div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              {% if myposts.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ myposts.previous_page_number}}">Previous</a></li>
+              {% endif %}
+              {% if myposts.has_next %}
+              <li class=""><a class="page-link" href="?page={{ myposts.next_page_number }}">Next</a></li>
+              {% endif %}
+            </ul>
+          </nav>
         </div> <!-- End .row -->
       </div>
+      
     </section> <!-- End Post Grid Section -->
 
   </main><!-- End #main -->

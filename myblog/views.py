@@ -2,9 +2,15 @@ from ast import Num
 from django.http import HttpResponse
 from django.shortcuts import render
 from blog.models import BlogPost, Contact
+from django.core.paginator import Paginator
+
 
 def index(request):
-   myposts=BlogPost.objects.all()
+   posts=BlogPost.objects.all()
+   paginator = Paginator(posts, 5)
+   page_number = request.GET.get('page')
+   myposts = paginator.get_page(page_number)
+
    return render(request,'index.html',{'myposts':myposts})
 
 def about(request):
@@ -20,6 +26,6 @@ def contact(request):
         details.save()
     return render(request,'contact.html')
 
-def post(request, id):
-    post = BlogPost.objects.filter(post_id=id) [0]
+def post(request, slug):
+    post = BlogPost.objects.filter(post_slug=slug) [0]
     return render(request,'post.html',{'post': post})

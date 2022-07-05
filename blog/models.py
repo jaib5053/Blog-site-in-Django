@@ -3,6 +3,7 @@ from unicodedata import category
 from django.db import models
 from matplotlib import image
 from sqlalchemy import true
+from autoslug import AutoSlugField
 
 # Create your models here.
 
@@ -15,7 +16,7 @@ class Category(models.Model):
 class BlogPost(models.Model):
     post_id=models.AutoField(primary_key=true)
     post_title=models.CharField(max_length=200)
-    post_slug=models.CharField(max_length=200)
+    post_slug= AutoSlugField(populate_from='post_title',unique=True, null=true)
     post_content=models.TextField(max_length=2000)
     post_date=models.DateField(auto_now_add=true)
     post_image=models.ImageField(upload_to='static/blog_img')
